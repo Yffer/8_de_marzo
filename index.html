@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz 8 de Marzo, Mi Amor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;700&family=Permanent+Marker&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="main-container">
+
+        <section id="cover-section">
+            <div class="cover-content">
+                <img src="https://raw.githubusercontent.com/username/repo-name/main/images/daisy-large.png" alt="Daisy" class="cover-daisy cover-daisy-large"> 
+                <img src="https://raw.githubusercontent.com/username/repo-name/main/images/daisy-small.png" alt="Daisy" class="cover-daisy cover-daisy-small"> 
+                <div class="cover-text">
+                    <div class="cover-text-1">Eres</div>
+                    <div class="cover-text-2">UNA MUJER</div>
+                    <div class="cover-text-3">¡Sin límites y excusas!</div>
+                    <div class="cover-text-4">¡Por eso eres encantadora!</div>
+                </div>
+            </div>
+            <button class="reveal-btn" onclick="revealDetail()">Ver tu sorpresa</button>
+        </section>
+
+        <section id="detail-section">
+            <div class="background-overlay"></div>
+
+            <div class="detail-content">
+                <header class="detail-header">
+                    <h1>El 8 de Marzo...</h1>
+                    <h2>Es Memoria y Gratitud</h2>
+                </header>
+
+                <section class="detail-message">
+                    <p>Es el eco suave de mujeres valientes que abrieron caminos</p>
+                    <p>para que hoy puedas elegir el tuyo.</p>
+                    <p>Siento orgullo de caminar a tu lado,</p>
+                    <p>de tu fuerza serena y de esa luz que transforma todo cuanto toca.</p>
+                    <p>Porque...</p>
+                    <blockquote class="quote">"No se nace mujer, se llega a serlo"</blockquote>
+                    <p>Y tú lo eres en la forma más hermosa.</p>
+                </section>
+
+                <section class="collage">
+                    <div class="polaroid-container">
+                        <div class="polaroid">
+                            <img src="1.jpg" alt="Foto de Nosotros 1">
+                            <p>Tu sonrisa ilumina todo.</p>
+                        </div>
+                        <div class="polaroid">
+                            <img src="2.jpg" alt="Foto de Nosotros 2">
+                            <p>Contigo, cada día es especial.</p>
+                        </div>
+                        <div class="polaroid">
+                            <img src="3.jpg" alt="Foto de Nosotros 3">
+                            <p>Tu fuerza me inspira.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <footer class="detail-footer">
+                    <p>FELIZ DÍA DE LA MUJER</p>
+                    <p>para aquella que me inspira y me enorgullece.</p>
+                    <p class="love">Te amo amor <span class="heart-icon">❤️</span></p>
+                </footer>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        function revealDetail() {
+            const container = document.getElementById('main-container');
+            container.classList.add('show-detail');
+        }
+    </script>
+
+</body>
+</html>

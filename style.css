@@ -1,0 +1,404 @@
+/* --- General Styles & Reset --- */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* Prevent scrolling during transition */
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- Global Backgrounds --- */
+#main-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    /* 1. Ruta de tu imagen (puede ser un link http:// o un archivo local 'imagen.jpg') */
+    background-image: url('portada.jpg'); 
+    
+    /* 2. Hace que la imagen cubra todo el espacio sin deformarse */
+    background-size: cover; 
+    
+    /* 3. Centra la imagen */
+    background-position: center; 
+    
+    /* 4. Evita que la imagen se repita como un mosaico */
+    background-repeat: no-repeat; 
+    
+    /* 5. (Opcional) Hace que el fondo se quede fijo aunque bajes por la página */
+    background-attachment: fixed; 
+}
+
+/* Cover Background (Pastel Pink with subtle pattern) */
+#cover-section {
+    background-color: #fce4ec; /* Pastel pink from image */
+    background-image: radial-gradient(#f8bbd0 1px, transparent 1px);
+    background-size: 20px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+}
+
+/* Detail Background (Cream/Off-White with subtle daisies) */
+#detail-section {
+    background-color: #fffaf0; /* Cream */
+    background-image: url('https://raw.githubusercontent.com/username/repo-name/main/images/subtle-daisies.png'); /* Replace with your repo's subtle daisy pattern URL */
+    background-size: cover;
+    position: absolute;
+    top: 100%; /* Initially off-screen */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto; /* Allow scrolling on this page */
+    z-index: 5;
+    transition: transform 1s ease-in-out;
+    padding-bottom: 50px;
+}
+
+/* Transition state */
+#main-container.show-detail #cover-section {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+#main-container.show-detail #detail-section {
+    transform: translateY(-100%);
+}
+
+/* --- Cover Page Styles (image_39.png) --- */
+.cover-content {
+    text-align: center;
+    max-width: 80%;
+    position: relative;
+    opacity: 0; /* Hidden for animation */
+    animation: fadeIn 1.5s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+.cover-text {
+    color: #000;
+}
+
+.cover-text-1 {
+    font-family: 'Dancing Script', cursive; /* or Pinyon Script */
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.cover-text-2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.cover-text-3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.cover-text-4 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.2rem;
+    margin-top: 15px;
+    color: #666;
+}
+
+/* Daisies on Cover */
+.cover-daisy {
+    position: absolute;
+    opacity: 0;
+    animation: daisyPopIn 1s ease-out forwards;
+}
+
+/* Placeholder daisy image for now - you'll replace this */
+.cover-daisy-large {
+    width: 150px;
+    bottom: -80px;
+    right: -60px;
+    animation-delay: 1s;
+}
+
+.cover-daisy-small {
+    width: 70px;
+    bottom: 20px;
+    left: -50px;
+    animation-delay: 1.3s;
+}
+
+/* --- Transition Button --- */
+.reveal-btn {
+    margin-top: 40px;
+    padding: 15px 35px;
+    background-color: #8e24aa; /* Purple like code QR */
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(142, 36, 170, 0.3);
+    transition: background-color 0.3s, transform 0.2s;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 2s;
+}
+
+.reveal-btn:hover {
+    background-color: #6a1b9a;
+    transform: scale(1.05);
+}
+
+.reveal-btn:active {
+    transform: scale(0.98);
+}
+
+/* --- Detail Page Styles --- */
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 250, 240, 0.6); /* Even lighter crema overlay */
+    z-index: 1;
+}
+
+.detail-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 60px 25px;
+    text-align: center;
+    box-sizing: border-box;
+    opacity: 0; /* Start hidden for section fade-in */
+}
+
+#main-container.show-detail .detail-content {
+    animation: sectionSlideUp 1s ease-out forwards;
+    animation-delay: 0.8s;
+}
+
+/* Header Detail */
+.detail-header h1 {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 3.5rem;
+    color: #5d3f6a;
+    margin-bottom: 5px;
+    opacity: 0;
+}
+
+.detail-header h2 {
+    font-weight: normal;
+    font-size: 1.6rem;
+    color: #888;
+    margin-top: 0;
+    opacity: 0;
+}
+
+/* Message Detail with sequential animation */
+.detail-message {
+    margin: 40px 0;
+    line-height: 1.8;
+    font-size: 1.15rem;
+    opacity: 0;
+}
+
+.detail-message p {
+    margin-bottom: 20px;
+    opacity: 0;
+}
+
+.quote {
+    font-size: 1.4rem;
+    font-style: italic;
+    font-weight: 700;
+    color: #5d3f6a;
+    margin: 30px 0;
+    padding: 0 15px;
+    position: relative;
+    opacity: 0;
+}
+
+.quote::before, .quote::after {
+    content: '“';
+    font-size: 4rem;
+    color: #f3e5f5;
+    position: absolute;
+    opacity: 0.5;
+}
+
+.quote::before {
+    top: -20px;
+    left: -10px;
+}
+
+.quote::after {
+    content: '”';
+    bottom: -50px;
+    right: -10px;
+}
+
+/* Sequential animation classes for detail content */
+#main-container.show-detail .detail-header h1 { animation: revealText 0.8s ease-out forwards; animation-delay: 1s; }
+#main-container.show-detail .detail-header h2 { animation: revealText 0.8s ease-out forwards; animation-delay: 1.4s; }
+#main-container.show-detail .detail-message { animation: fadeIn 0.8s ease-out forwards; animation-delay: 1.8s; }
+#main-container.show-detail .detail-message p:nth-child(1) { animation: revealText 0.8s ease-out forwards; animation-delay: 2.0s; }
+#main-container.show-detail .detail-message p:nth-child(2) { animation: revealText 0.8s ease-out forwards; animation-delay: 2.4s; }
+#main-container.show-detail .detail-message p:nth-child(3) { animation: revealText 0.8s ease-out forwards; animation-delay: 2.8s; }
+#main-container.show-detail .detail-message p:nth-child(4) { animation: revealText 0.8s ease-out forwards; animation-delay: 3.2s; }
+#main-container.show-detail .quote { animation: revealText 0.8s ease-out forwards; animation-delay: 3.6s; }
+#main-container.show-detail .detail-message p:nth-child(6) { animation: revealText 0.8s ease-out forwards; animation-delay: 4.0s; }
+
+/* --- Advanced Collage Styles --- */
+.collage {
+    margin: 60px 0;
+    opacity: 0;
+}
+
+#main-container.show-detail .collage {
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 4.5s;
+}
+
+.polaroid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    perspective: 1000px; /* For 3D hover effect */
+}
+
+.polaroid {
+    background-color: white;
+    padding: 12px 12px 25px 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    width: 170px;
+    opacity: 0; /* Hidden for animation */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.polaroid img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.polaroid p {
+    margin: 15px 0 0 0;
+    font-size: 1rem;
+    color: #555;
+    font-family: 'Permanent Marker', cursive;
+}
+
+/* Collage animation: sequential 'pop-in' */
+#main-container.show-detail .polaroid:nth-child(1) { animation: polaroidPopIn 0.6s ease-out forwards; animation-delay: 4.8s; transform: rotate(-6deg) translateZ(0); }
+#main-container.show-detail .polaroid:nth-child(2) { animation: polaroidPopIn 0.6s ease-out forwards; animation-delay: 5.1s; transform: rotate(5deg) translateZ(0); }
+#main-container.show-detail .polaroid:nth-child(3) { animation: polaroidPopIn 0.6s ease-out forwards; animation-delay: 5.4s; transform: rotate(-3deg) translateZ(0); }
+
+/* Enhanced hover effect for Polaroids */
+.polaroid:hover {
+    transform: scale(1.08) rotate(0deg) translateZ(50px) !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+/* Footer Detail */
+.detail-footer {
+    margin-top: 60px;
+    font-size: 1.1rem;
+    color: #666;
+    opacity: 0;
+}
+
+#main-container.show-detail .detail-footer {
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 6s;
+}
+
+.detail-footer p {
+    margin-bottom: 12px;
+}
+
+.love {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #b03a2e;
+    position: relative;
+    display: inline-block;
+}
+
+.heart-icon {
+    display: inline-block;
+    animation: heartbeat 1.5s infinite;
+    margin-left: 5px;
+}
+
+/* --- Animations (@keyframes) --- */
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+@keyframes sectionSlideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes revealText {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes polaroidPopIn {
+    0% { transform: scale(0.5) rotate(-20deg) translateZ(-100px); opacity: 0; }
+    70% { transform: scale(1.1) rotate(5deg) translateZ(20px); opacity: 1; }
+    100% { transform: scale(1) translateZ(0); opacity: 1; }
+}
+
+@keyframes daisyPopIn {
+    0% { transform: scale(0) rotate(-30deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0deg); opacity: 0.9; }
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 600px) {
+    .cover-text-1 { font-size: 1.6rem; }
+    .cover-text-2 { font-size: 2.2rem; }
+    .cover-text-3 { font-size: 1.4rem; }
+    .cover-daisy-large { width: 100px; bottom: -50px; right: -30px; }
+    .cover-daisy-small { width: 50px; bottom: 10px; left: -30px; }
+    .reveal-btn { font-size: 0.9rem; padding: 12px 25px; }
+
+    .detail-header h1 { font-size: 2.8rem; }
+    .quote { font-size: 1.2rem; }
+    .quote::before, .quote::after { font-size: 3rem; }
+    .polaroid { width: 140px; }
+    .polaroid img { height: 140px; }
+}
